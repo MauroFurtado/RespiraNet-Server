@@ -19,7 +19,7 @@ mqttClient.on("connect", () => {
       else console.log("[MQTT] subscrito em", t);
     });//
   });
-}); 
+});
 // tratar erros de conexão MQTT
 mqttClient.on("error", (err) => {
   console.error("[MQTT] erro", err.message || err);

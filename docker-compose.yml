@@ -13,7 +13,7 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./migrations:/docker-entrypoint-initdb.d/002_create_schema.sql
+      - ./database/RespiraNetSchema:/docker-entrypoint-initdb.d/RespiraNetSchema.sql:ro
     ports:
       - "${PGPORT:-5432}:5432"
 
@@ -22,7 +22,7 @@ services:
     restart: always
     ports:
       - "1883:1883"
-      - "9001:9001"
+      - "8080:8080"
     volumes:
       - mosquitto_data:/mosquitto/data
       - mosquitto_log:/mosquitto/log
