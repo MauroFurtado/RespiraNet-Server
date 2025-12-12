@@ -76,7 +76,7 @@ mqttClient.on("message", async (topic, messageBuffer) => {
       console.log(`[DB] luminosity ${value} (node ${mac})`);
     } else {
       const sensorName = sensorTypeTopic || (payload.type || "").toLowerCase() || "unknown";
-      await db.insertGas(nodeId, sensorName, value, ts, raw);
+      await db.insertGas(nodeId, value, ts, raw);
       console.log(`[DB] gas(${sensorName}) ${value} (node ${mac})`);
     }
   } catch (err) {
@@ -94,3 +94,10 @@ process.on("SIGINT", async () => {
   await db.pool.end();
   server.close(() => process.exit(0));
 });
+
+async function insertGas(nodeId, value, ts, raw) {
+  await pool.query(
+    `INSERT INTO gas_readings (node_id, value, ts, raw) VALUES ($1, $2, $3, $4)`,
+    [nodeId, value, ts, raw]
+  );
+}
