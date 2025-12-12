@@ -46,10 +46,10 @@ async function insertLuminosity(nodeId, value, ts, raw) {
   );
 }
 
-async function insertGas(nodeId, sensor, value, ts, raw) {
+async function insertGas(nodeId, value, ts, raw) {
   await pool.query(
-    `INSERT INTO gas_readings (node_id, sensor, value, ts, raw) VALUES ($1, $2, $3, $4, $5)`,
-    [nodeId, sensor, value, ts, raw]
+    `INSERT INTO gas_readings (node_id,value, ts, raw) VALUES ($1, $2, $3, $4)`,
+    [nodeId, value, ts, raw]
   );
 }
 
