@@ -2,11 +2,28 @@ const express = require("express");
 const mqtt = require("mqtt");
 const config = require("./config");
 const db = require("./db");
+const { setupCORS, setupErrorHandling, setupLogging } = require("./middleware");
+
+// Importar rotas da API
+const nodesRouter = require("./routes/nodes");
+const readingsRouter = require("./routes/readings");
 
 const app = express();
+
+// Middleware
+setupLogging(app);
+setupCORS(app);
 app.use(express.json());
 
+// Rotas básicas
 app.get("/health", (req, res) => res.json({ status: "ok" }));
+
+// Rotas da API REST para o app mobile
+app.use("/api/nodes", nodesRouter);
+app.use("/api/readings", readingsRouter);
+
+// Tratamento de erros
+setupErrorHandling(app);
 
 const mqttClient = mqtt.connect(config.mqtt.url, { reconnectPeriod: 5000 });// reconectar a cada 5s se desconectar
 
