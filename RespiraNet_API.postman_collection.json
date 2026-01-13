@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "RespiraNet API",
+    "description": "API REST para alimentar o app mobile com dados de sensores",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Nós (Nodes)",
+      "item": [
+        {
+          "name": "Listar todos os nós",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/nodes"
+          }
+        },
+        {
+          "name": "Obter nó por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/nodes/1"
+          }
+        },
+        {
+          "name": "Obter status de um nó",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/nodes/1/status"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leituras (Readings)",
+      "item": [
+        {
+          "name": "Temperatura - últimas 50",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/readings/temperature?limit=50"
+          }
+        },
+        {
+          "name": "Temperatura - nó específico",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/readings/temperature?nodeId=1&limit=50"
+          }
+        },
+        {
+          "name": "Umidade - últimas 50",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/readings/humidity?limit=50"
+          }
+        },
+        {
+          "name": "Luminosidade - últimas 50",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/readings/luminosity?limit=50"
+          }
+        },
+        {
+          "name": "Gases - nó específico",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/readings/gas?nodeId=1&limit=50"
+          }
+        },
+        {
+          "name": "Últimas leituras de um nó",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/readings/1/latest"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Análise (Analytics)",
+      "item": [
+        {
+          "name": "Média de temperatura",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/analytics/average?nodeId=1&sensorType=temperature"
+          }
+        },
+        {
+          "name": "Média com data range",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/analytics/average?nodeId=1&sensorType=temperature&startDate=2026-01-01&endDate=2026-01-12"
+          }
+        },
+        {
+          "name": "Estatísticas completas",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/analytics/statistics?nodeId=1&sensorType=temperature"
+          }
+        },
+        {
+          "name": "Estatísticas de umidade",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/analytics/statistics?nodeId=1&sensorType=humidity"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Saúde",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/health"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

@@ -18,17 +18,7 @@ services:
     ports:
       - "${PGPORT:-5432}:5432"
 
-  mqtt:
-    image: eclipse-mosquitto:2.0
-    restart: always
-    ports:
-      - "1883:1883"
-      - "8080:8080"
-    volumes:
-      - mosquitto_data:/mosquitto/data
-      - mosquitto_log:/mosquitto/log
-
-
+  
   app:
     build: .
     restart: unless-stopped
